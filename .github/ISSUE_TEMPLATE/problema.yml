@@ -1,0 +1,44 @@
+name: Algo deu errado
+description: Queda, tela estranha, mod que não funciona, fps menor
+labels: ["problema"]
+body:
+  - type: textarea
+    id: oque
+    attributes:
+      label: O que aconteceu?
+      description: O que você fazia, o que apareceu e o que esperava. Se puder, mande uma foto.
+    validations:
+      required: true
+  - type: input
+    id: pc
+    attributes:
+      label: Placa de vídeo e processador
+      placeholder: "RX 6600, Ryzen 5 5600"
+    validations:
+      required: true
+  - type: input
+    id: versao
+    attributes:
+      label: Versão do NiwVulkan e do Forge
+      placeholder: "0.3.1, Forge 47.4.20"
+    validations:
+      required: true
+  - type: textarea
+    id: mods
+    attributes:
+      label: Mods instalados
+      description: Lista ou nome do modpack. Diga se usa Embeddium, Oculus ou OptiFine.
+    validations:
+      required: true
+  - type: dropdown
+    id: opengl
+    attributes:
+      label: Com `vulkan=false` em config/niwvulkan.properties o problema some?
+      options: ["Não testei", "Some", "Continua"]
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Arraste o `logs/latest.log` (e o arquivo de `crash-reports`, se houver). Ele pode conter seu nome de usuário; apague se quiser.

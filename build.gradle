@@ -1,0 +1,45 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '6.0.54'
+    id 'org.spongepowered.mixin'
+}
+version = mod_version
+group = 'br.niw.vulkan'
+base { archivesName = 'niwvulkan' }
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+minecraft { mappings channel: 'official', version: '1.20.1'
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+}
+mixin {
+    add sourceSets.main, 'niwvulkan.refmap.json'
+    config 'niwvulkan.mixins.json'
+}
+repositories {
+    mavenCentral()
+    maven { name = 'Modrinth'; url = 'https://api.modrinth.com/maven'; content { includeGroup 'maven.modrinth' } }
+}
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.28'
+    // apenas para compilar a parte opcional do Palladium (fica fora do jar)
+    compileOnly fg.deobf('maven.modrinth:threetag-palladium:4.5.9+1.20.1-forge')
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+processResources {
+    inputs.property 'versao', mod_version
+    filesMatching('META-INF/mods.toml') { expand versao: mod_version }
+}
+jar {
+    manifest.attributes 'MixinConfigs': 'niwvulkan.mixins.json', 'Implementation-Version': mod_version
+    from('LICENSE') { into 'META-INF' }
+    from('licencas') { into 'META-INF/licencas' }
+    finalizedBy 'reobfJar'
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
+// Pede ao ForgeGradle o jar de fontes do ambiente de desenvolvimento (o mesmo que a IDE baixa), só para consulta local.
+tasks.register('fontesForge') {
+    doLast {
+        def ids = configurations.compileClasspath.incoming.resolutionResult.allComponents.collect { it.id }.findAll { it.displayName.contains('net.minecraftforge:forge:') }
+        dependencies.createArtifactResolutionQuery().forComponents(ids).withArtifacts(JvmLibrary, SourcesArtifact).execute().resolvedComponents.each { c ->
+            c.getArtifacts(SourcesArtifact).each { a -> println "FONTES " + (a.hasProperty('file') ? a.file : a) }
+        }
+    }
+}

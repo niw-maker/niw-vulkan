@@ -1,0 +1,8 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+[[mods]]
+modId="niwmedidor"
+version="0.1.0"
+displayName="Niw Medidor"
+description="Roteiro automatico de medicao da bancada do NiwVulkan."

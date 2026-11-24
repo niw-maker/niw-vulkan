@@ -1,0 +1,12 @@
+bancada/
+build/
+.gradle/
+run*/
+out/
+*.log
+*.hprof
+*.jfr
+.env*
+__pycache__/
+abrir claude aqui.bat
+ferramentas/packs.json

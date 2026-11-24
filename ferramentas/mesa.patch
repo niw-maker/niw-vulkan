@@ -1,0 +1,39 @@
+--- a/src/util/u_queue.c
++++ b/src/util/u_queue.c
+@@ -24,6 +24,10 @@
+  * of the Software.
+  */
+ 
++#ifdef _WIN32
++#define WIN32_LEAN_AND_MEAN
++#include <windows.h>
++#endif
+ #include "u_queue.h"
+ 
+ #include "c11/threads.h"
+@@ -262,6 +266,14 @@
+    }
+ #endif
+ 
++#ifdef _WIN32
++   /* NiwVulkan: as threads por onde o quadro passa nao podem ficar atras das
++    * threads de mundo do jogo, que ocupam todos os nucleos. */
++   if (strstr(queue->name, "gdrv") || strstr(queue->name, "zfq") ||
++       !strcmp(queue->name, "gl") || strstr(queue->name, ":gl"))
++      SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
++#endif
++
+    if (strlen(queue->name) > 0) {
+       char name[16];
+       snprintf(name, sizeof(name), "%s%i", queue->name, thread_index);
+--- a/src/gallium/frontends/wgl/stw_st.c
++++ b/src/gallium/frontends/wgl/stw_st.c
+@@ -142,6 +142,8 @@
+    win32->hinstance = GetModuleHandle(NULL);
+    win32->hwnd = stwfb->fb->hWnd;
+    out->has_alpha = true;
++   /* NiwVulkan: como no OpenGL do Windows, o alfa da janela nao a deixa transparente. */
++   out->present_opaque = true;
+ }
+ #endif
+ /**

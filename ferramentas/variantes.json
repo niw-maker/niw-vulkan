@@ -1,0 +1,129 @@
+{
+ "puro": {
+  "mod": false
+ },
+ "soVk": {
+  "mod": true,
+  "props": [
+   "niwvulkan.terreno=false",
+   "niwvulkan.lotes=false",
+   "niwvulkan.modelos=false"
+  ]
+ },
+ "niwGl": {
+  "mod": true,
+  "props": [
+   "niwvulkan.vulkan=false"
+  ]
+ },
+ "niwVk": {
+  "mod": true,
+  "props": []
+ },
+ "semEmb": {
+  "mod": false,
+  "tira": [
+   "embeddium*.jar",
+   "oculus*.jar"
+  ]
+ },
+ "niwSemEmb": {
+  "mod": true,
+  "tira": [
+   "embeddium*.jar",
+   "oculus*.jar"
+  ],
+  "props": []
+ },
+ "niwGlSemEmb": {
+  "mod": true,
+  "tira": [
+   "embeddium*.jar",
+   "oculus*.jar"
+  ],
+  "props": [
+   "niwvulkan.vulkan=false"
+  ]
+ },
+ "primeira": {
+  "mod": true,
+  "semJanelaCedo": false
+ },
+ "vkSemGlt": {
+  "mod": true,
+  "props": [
+   "niwvulkan.glthread=false"
+  ]
+ },
+ "vkDb": {
+  "mod": true,
+  "props": [
+   "niwvulkan.mesa=ZINK_DESCRIPTORS=db"
+  ]
+ },
+ "vkLazy": {
+  "mod": true,
+  "props": [
+   "niwvulkan.mesa=ZINK_DESCRIPTORS=lazy"
+  ]
+ },
+ "niwShen": {
+  "mod": true,
+  "tira": [
+   "embeddium*.jar",
+   "oculus*.jar"
+  ],
+  "props": [],
+  "jvm": [
+   "-XX:+UseShenandoahGC"
+  ]
+ },
+ "niwG1t": {
+  "mod": true,
+  "tira": [
+   "embeddium*.jar",
+   "oculus*.jar"
+  ],
+  "props": [],
+  "jvm": [
+   "-XX:+UseG1GC",
+   "-XX:+ParallelRefProcEnabled",
+   "-XX:MaxGCPauseMillis=20",
+   "-XX:+UnlockExperimentalVMOptions",
+   "-XX:G1NewSizePercent=20",
+   "-XX:G1ReservePercent=10",
+   "-XX:G1HeapRegionSize=16M",
+   "-XX:InitiatingHeapOccupancyPercent=20",
+   "-XX:+PerfDisableSharedMem"
+  ]
+ },
+ "semPrio": {
+  "mod": true,
+  "props": [
+   "niwvulkan.prioridade=false"
+  ]
+ },
+ "semMundo": {
+  "mod": true,
+  "props": [
+   "niwvulkan.mundo=false",
+   "niwvulkan.entidades=false"
+  ]
+ },
+ "semGer": {
+  "mod": true,
+  "props": [
+   "niwvulkan.geracao=false"
+  ],
+  "tira": [
+   "embeddium*.jar",
+   "oculus*.jar"
+  ]
+ },
+ "semPal": {
+  "mod": true,
+  "props": [
+   "niwvulkan.palladium=false"
+  ]
+ }
+}
